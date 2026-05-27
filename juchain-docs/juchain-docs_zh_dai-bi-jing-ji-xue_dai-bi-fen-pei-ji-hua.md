@@ -1,0 +1,47 @@
+# 代币分配计划
+
+JuChain的代币分配旨在平衡即时效用与长期可持续性。分配计划反映了项目致力于构建稳健且广泛使用的区块链生态系统的承诺。
+
+## 高层级代币分配
+
+JU代币的初始分配结构如下：
+
+| 类别    | 分配比例 |
+| ----- | ---- |
+| 算力贡献者 | 97%  |
+| 初始发行  | 3%   |
+
+这种分配结构强调：
+
+1. **社区驱动增长**：绝大多数代币(97%)分配给算力贡献者，确保随时间推移的广泛分配和社区参与。
+2. **最小预售**：只有小部分(3%)分配给初始投资者。
+3. **获取式分配**：大多数代币通过积极参与网络安全和运营进入流通，而非通过预售分配。
+4. **长期协调**：通过算力逐步释放代币，使代币分配与网络增长和使用保持一致。
+
+## 战略理由
+
+这种分配方法在战略上旨在：
+
+* 防止代币过度集中在少数人手中
+* 确保所有参与者获取JU代币的公平机会
+* 支持渐进、有机的价格发现
+* 使代币分配与实际网络参与和增长保持一致
+* 创造可持续的代币经济，支持JuChain作为链流量中心的长期愿景
+
+
+---
+
+# Agent Instructions: Querying This Documentation
+
+If you need additional information that is not directly available in this page, you can query the documentation dynamically by asking a question.
+
+Perform an HTTP GET request on the current page URL with the `ask` query parameter:
+
+```
+GET https://juchain.gitbook.io/juchain-docs/zh/dai-bi-jing-ji-xue/dai-bi-fen-pei-ji-hua.md?ask=<question>
+```
+
+The question should be specific, self-contained, and written in natural language.
+The response will contain a direct answer to the question and relevant excerpts and sources from the documentation.
+
+Use this mechanism when the answer is not explicitly present in the current page, you need clarification or additional context, or you want to retrieve related documentation sections.

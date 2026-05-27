@@ -1,0 +1,79 @@
+# JuChain基金会
+
+JuChain基金会在生态系统发展中扮演关键角色，获得每日代币发行量的10%(7,200 JU)用于资助各种计划。
+
+## 治理结构
+
+基金会的资金由社区选举的多重签名财库管理，确保：
+
+* 透明的链上资金管理
+* 交易需要多个签名人
+* 社区监督所有支出
+
+## 预算分配
+
+基金会将其资源分配至五个战略预算：
+
+### 研发 (40%)
+
+* 核心协议升级
+* 安全审计
+* 可扩展性研发
+* 学术合作
+* 黑客马拉松
+
+### 拨款与孵化 (25%)
+
+* 基于里程碑的Dapp团队拨款
+* 工具开发
+* 基础设施提供商
+* 社区计划
+
+### 营销与增长 (20%)
+
+* 全球会议
+* 大使计划
+* 教育内容
+* 放大JuChain流量中心战略的用户获取激励
+
+### 流动性与市场运营 (10%)
+
+* AMM种子资金
+* 交叉交易所流动性
+* 市场做市以减少早期市场的滑点和波动性
+
+### 应急储备 (5%)
+
+* 漏洞赏金的紧急资金
+* 关键基础设施故障
+* 不可预见的监管成本
+
+## 透明度与责任
+
+为确保资源的正确使用，基金会实施多项问责措施：
+
+1. **季度报告**：基金会每季度发布详细支出报告
+2. **社区批准**：报告必须通过简单多数治理投票批准
+3. **预算续期**：持续资金取决于社区批准
+4. **链上跟踪**：所有资金流动在区块链上可见
+5. **公开申请**：拨款计划以透明标准和公开申请流程运作
+
+这种结构化方法确保基金会资源指向最大化JuChain生态系统价值的计划，同时保持完全透明和社区监督。
+
+
+---
+
+# Agent Instructions: Querying This Documentation
+
+If you need additional information that is not directly available in this page, you can query the documentation dynamically by asking a question.
+
+Perform an HTTP GET request on the current page URL with the `ask` query parameter:
+
+```
+GET https://juchain.gitbook.io/juchain-docs/zh/dai-bi-jing-ji-xue/juchain-ji-jin-hui.md?ask=<question>
+```
+
+The question should be specific, self-contained, and written in natural language.
+The response will contain a direct answer to the question and relevant excerpts and sources from the documentation.
+
+Use this mechanism when the answer is not explicitly present in the current page, you need clarification or additional context, or you want to retrieve related documentation sections.

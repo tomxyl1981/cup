@@ -1,0 +1,53 @@
+# 代币分配明细
+
+本节提供JU代币分配的详细明细，包括关于初始发行和固定每日发行计划的具体内容。
+
+## 初始发行
+
+初始发行代表了公众参与JuChain生态系统的初始机会：
+
+* **分配**: 总供应量的3% (6,300,000 JU)
+* **发行价格**: 每JU 0.1 USD
+* **释放计划**: 代币生成事件(TGE)时100%解锁
+
+## 固定每日发行
+
+在初始代币生成事件之后，JU代币将根据固定每日发行计划释放：
+
+* **每日总产出**: 72,000 JU
+* **分配明细**:
+  * 算力产出 (80%): 57,600 JU
+  * JuChain基金会 (10%): 7,200 JU
+  * JuChain合伙人节点 (10%): 7,200 JU
+
+## 分配规则
+
+每日发行的分配反映了JuChain的战略优先事项：
+
+1. **算力产出 (80%)**: 最大的分配算力贡献者，确保社区可持续发展。
+2. **JuChain基金会 (10%)**: 这一分配资金用于持续开发、营销和生态系统增长计划，确保协议和支持工具的可持续发展。
+3. **JuChain合伙人节点 (10%)**: 合作伙伴节点在扩展JuChain的覆盖范围和实用性方面发挥关键作用，为生态系统带来战略资源和用户。
+
+## 创世供应
+
+* **总创世供应量**: 210,000,000 JU (100%)
+* **即时流通**: 3% (6,300,000 JU) 通过IO
+* **逐步释放**: 剩余97%通过算力产出和生态系统计划随时间释放
+
+
+---
+
+# Agent Instructions: Querying This Documentation
+
+If you need additional information that is not directly available in this page, you can query the documentation dynamically by asking a question.
+
+Perform an HTTP GET request on the current page URL with the `ask` query parameter:
+
+```
+GET https://juchain.gitbook.io/juchain-docs/zh/dai-bi-jing-ji-xue/dai-bi-fen-pei-ming-xi.md?ask=<question>
+```
+
+The question should be specific, self-contained, and written in natural language.
+The response will contain a direct answer to the question and relevant excerpts and sources from the documentation.
+
+Use this mechanism when the answer is not explicitly present in the current page, you need clarification or additional context, or you want to retrieve related documentation sections.
