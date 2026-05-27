@@ -1,0 +1,675 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>2026 FIFA World Cup™ | 參賽隊伍與賽程</title>
+    <meta name="description" content="2026年世界盃48支參賽隊伍完整名單、小組分組、賽程安排">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        :root {
+            --primary: #56042c;
+            --secondary: #c9a227;
+            --accent: #e31737;
+            --bg: #0a0a0a;
+            --card: #141414;
+            --text: #ffffff;
+            --text-muted: #a0a0a0;
+            --border: #2a2a2a;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+        }
+        
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, var(--primary) 0%, #1a0a2e 50%, var(--bg) 100%);
+            padding: 2rem 1rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23c9a227' fill-opacity='0.05'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+            opacity: 0.5;
+        }
+        
+        .hero-content {
+            position: relative;
+            z-index: 1;
+        }
+        
+        .hero h1 {
+            font-size: 1.75rem;
+            font-weight: 800;
+            margin-bottom: 0.5rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+        
+        .hero .subtitle {
+            color: var(--secondary);
+            font-size: 0.9rem;
+            font-weight: 600;
+        }
+        
+        .hero .stats {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            margin-top: 1.5rem;
+            flex-wrap: wrap;
+        }
+        
+        .hero .stat {
+            text-align: center;
+        }
+        
+        .hero .stat-value {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--secondary);
+        }
+        
+        .hero .stat-label {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+        }
+        
+        /* Navigation Tabs */
+        .tabs {
+            display: flex;
+            background: var(--card);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            border-bottom: 1px solid var(--border);
+        }
+        
+        .tab {
+            flex: 1;
+            padding: 1rem;
+            text-align: center;
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: var(--text-muted);
+            background: none;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s;
+            border-bottom: 3px solid transparent;
+        }
+        
+        .tab.active {
+            color: var(--text);
+            border-bottom-color: var(--secondary);
+        }
+        
+        .tab:hover {
+            color: var(--text);
+        }
+        
+        /* Content Sections */
+        .section {
+            display: none;
+            padding: 1rem;
+        }
+        
+        .section.active {
+            display: block;
+        }
+        
+        .section-title {
+            font-size: 1.1rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid var(--secondary);
+            display: inline-block;
+        }
+        
+        /* Team Cards */
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+            gap: 0.75rem;
+        }
+        
+        .team-card {
+            background: var(--card);
+            border-radius: 12px;
+            padding: 1rem;
+            border: 1px solid var(--border);
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        
+        .team-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 20px rgba(201, 162, 39, 0.1);
+        }
+        
+        .team-card .flag {
+            font-size: 1.75rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .team-card .name {
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-bottom: 0.25rem;
+        }
+        
+        .team-card .name-cn {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+        }
+        
+        .team-card .meta {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 0.75rem;
+            font-size: 0.7rem;
+            color: var(--text-muted);
+        }
+        
+        /* Group Cards */
+        .group-card {
+            background: var(--card);
+            border-radius: 12px;
+            margin-bottom: 1rem;
+            overflow: hidden;
+            border: 1px solid var(--border);
+        }
+        
+        .group-header {
+            background: linear-gradient(135deg, var(--primary), #2a1040);
+            padding: 0.75rem 1rem;
+            font-weight: 700;
+            font-size: 0.9rem;
+        }
+        
+        .group-teams {
+            padding: 0.5rem;
+        }
+        
+        .group-team {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 0.6rem;
+            border-radius: 8px;
+            transition: background 0.2s;
+        }
+        
+        .group-team:hover {
+            background: rgba(201, 162, 39, 0.1);
+        }
+        
+        .group-team .flag {
+            font-size: 1.5rem;
+        }
+        
+        .group-team .info {
+            flex: 1;
+        }
+        
+        .group-team .name {
+            font-size: 0.85rem;
+            font-weight: 600;
+        }
+        
+        .group-team .rank {
+            font-size: 0.7rem;
+            color: var(--text-muted);
+        }
+        
+        /* Schedule Cards */
+        .schedule-card {
+            background: var(--card);
+            border-radius: 12px;
+            padding: 1.25rem;
+            margin-bottom: 1rem;
+            border: 1px solid var(--border);
+        }
+        
+        .schedule-card h3 {
+            font-size: 1rem;
+            margin-bottom: 0.75rem;
+            color: var(--secondary);
+        }
+        
+        .schedule-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.5rem 0;
+            border-bottom: 1px solid var(--border);
+        }
+        
+        .schedule-item:last-child {
+            border-bottom: none;
+        }
+        
+        .schedule-item .label {
+            color: var(--text-muted);
+            font-size: 0.85rem;
+        }
+        
+        .schedule-item .value {
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+        
+        /* Host Cities */
+        .host-section {
+            margin-top: 1.5rem;
+        }
+        
+        .country-block {
+            margin-bottom: 1rem;
+        }
+        
+        .country-block h4 {
+            font-size: 0.9rem;
+            color: var(--secondary);
+            margin-bottom: 0.5rem;
+        }
+        
+        .city-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+        
+        .city-tag {
+            background: var(--card);
+            border: 1px solid var(--border);
+            padding: 0.4rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.75rem;
+        }
+        
+        /* Format Section */
+        .format-card {
+            background: linear-gradient(135deg, var(--card), #1a1a2e);
+            border-radius: 12px;
+            padding: 1.25rem;
+            border: 1px solid var(--border);
+        }
+        
+        .format-card p {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            margin-bottom: 0.5rem;
+        }
+        
+        .format-card p:last-child {
+            margin-bottom: 0;
+        }
+        
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 2rem 1rem;
+            color: var(--text-muted);
+            font-size: 0.75rem;
+            border-top: 1px solid var(--border);
+            margin-top: 2rem;
+        }
+        
+        footer a {
+            color: var(--secondary);
+            text-decoration: none;
+        }
+        
+        /* Desktop Enhancements */
+        @media (min-width: 768px) {
+            .hero {
+                padding: 3rem 2rem;
+            }
+            
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .hero .stats {
+                gap: 3rem;
+            }
+            
+            .hero .stat-value {
+                font-size: 2rem;
+            }
+            
+            .section {
+                padding: 1.5rem;
+                max-width: 1200px;
+                margin: 0 auto;
+            }
+            
+            .team-grid {
+                grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+                gap: 1rem;
+            }
+            
+            .groups-grid {
+                display: grid;
+                grid-template-columns: repeat(2, 1fr);
+                gap: 1rem;
+            }
+            
+            .schedule-grid {
+                display: grid;
+                grid-template-columns: repeat(2, 1fr);
+                gap: 1rem;
+            }
+        }
+        
+        @media (min-width: 1024px) {
+            .groups-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+            
+            .schedule-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+        
+        /* Scroll Animation */
+        .fade-in {
+            animation: fadeIn 0.5s ease-out;
+        }
+        
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Hero Section -->
+    <header class="hero">
+        <div class="hero-content">
+            <h1>2026 FIFA World Cup™</h1>
+            <p class="subtitle">加拿大 · 墨西哥 · 美國</p>
+            <div class="stats">
+                <div class="stat">
+                    <div class="stat-value">48</div>
+                    <div class="stat-label">參賽隊伍</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-value">104</div>
+                    <div class="stat-label">比賽場次</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-value">16</div>
+                    <div class="stat-label">主辦城市</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-value">39</div>
+                    <div class="stat-label">比賽天數</div>
+                </div>
+            </div>
+        </div>
+    </header>
+    
+    <!-- Navigation Tabs -->
+    <nav class="tabs">
+        <button class="tab active" data-section="teams">參賽隊伍</button>
+        <button class="tab" data-section="groups">小組分組</button>
+        <button class="tab" data-section="schedule">賽程信息</button>
+    </nav>
+    
+    <!-- Teams Section -->
+    <section id="teams" class="section active">
+        <h2 class="section-title">東道主國家</h2>
+        <div class="team-grid" id="hosts"></div>
+        
+        <h2 class="section-title" style="margin-top: 1.5rem;">已晉級隊伍</h2>
+        <div class="team-grid" id="qualified"></div>
+    </section>
+    
+    <!-- Groups Section -->
+    <section id="groups" class="section">
+        <h2 class="section-title">小組分組</h2>
+        <div class="groups-grid" id="groupsContainer"></div>
+    </section>
+    
+    <!-- Schedule Section -->
+    <section id="schedule" class="section">
+        <h2 class="section-title">比賽時間</h2>
+        <div class="schedule-grid">
+            <div class="schedule-card">
+                <h3>重要日期</h3>
+                <div class="schedule-item">
+                    <span class="label">開幕</span>
+                    <span class="value">2026年6月11日</span>
+                </div>
+                <div class="schedule-item">
+                    <span class="label">決賽</span>
+                    <span class="value">2026年7月19日</span>
+                </div>
+                <div class="schedule-item">
+                    <span class="label">比賽天數</span>
+                    <span class="value">39天</span>
+                </div>
+                <div class="schedule-item">
+                    <span class="label">總比賽場次</span>
+                    <span class="value">104場</span>
+                </div>
+            </div>
+        </div>
+        
+        <div class="host-section">
+            <h2 class="section-title">主辦城市</h2>
+            <div class="country-block">
+                <h4>🇺🇸 美國 (11城)</h4>
+                <div class="city-list">
+                    <span class="city-tag">Atlanta</span>
+                    <span class="city-tag">Boston</span>
+                    <span class="city-tag">Dallas</span>
+                    <span class="city-tag">Houston</span>
+                    <span class="city-tag">Kansas City</span>
+                    <span class="city-tag">Los Angeles</span>
+                    <span class="city-tag">Miami</span>
+                    <span class="city-tag">New York/NJ</span>
+                    <span class="city-tag">Philadelphia</span>
+                    <span class="city-tag">San Francisco</span>
+                    <span class="city-tag">Seattle</span>
+                </div>
+            </div>
+            <div class="country-block">
+                <h4>🇲🇽 墨西哥 (3城)</h4>
+                <div class="city-list">
+                    <span class="city-tag">Mexico City</span>
+                    <span class="city-tag">Guadalajara</span>
+                    <span class="city-tag">Monterrey</span>
+                </div>
+            </div>
+            <div class="country-block">
+                <h4>🇨🇦 加拿大 (2城)</h4>
+                <div class="city-list">
+                    <span class="city-tag">Toronto</span>
+                    <span class="city-tag">Vancouver</span>
+                </div>
+            </div>
+        </div>
+        
+        <div class="host-section">
+            <h2 class="section-title">賽制說明</h2>
+            <div class="format-card">
+                <p>• 首次擴軍至48支隊伍參賽</p>
+                <p>• 小組賽前兩名及8支成績最好的第三名晉級32強</p>
+                <p>• 淘汰賽包括：32強、16強、8強、半決賽、季軍賽、決賽</p>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Footer -->
+    <footer>
+        <p>數據來源: <a href="https://fifa.com" target="_blank">FIFA.com</a> | 抓取時間: 2026年5月</p>
+        <p style="margin-top: 0.5rem;">© 2026 jucup.cx</p>
+    </footer>
+    
+    <script>
+        // Team Data
+        const teams = {
+            hosts: [
+                { flag: '🇨🇦', name: 'Canada', nameCn: '加拿大', group: 'B', rank: 30, appearances: 2 },
+                { flag: '🇲🇽', name: 'Mexico', nameCn: '墨西哥', group: 'A', rank: 15, appearances: 17 },
+                { flag: '🇺🇸', name: 'USA', nameCn: '美國', group: 'D', rank: 16, appearances: 11 }
+            ],
+            qualified: [
+                { flag: '🇩🇿', name: 'Algeria', nameCn: '阿爾及利亞', group: 'J', rank: 28, appearances: 4 },
+                { flag: '🇦🇷', name: 'Argentina', nameCn: '阿根廷', group: 'J', rank: 3, appearances: 18 },
+                { flag: '🇦🇺', name: 'Australia', nameCn: '澳大利亞', group: 'D', rank: 27, appearances: 6 },
+                { flag: '🇦🇹', name: 'Austria', nameCn: '奧地利', group: 'J', rank: 24, appearances: 7 },
+                { flag: '🇧🇪', name: 'Belgium', nameCn: '比利時', group: 'G', rank: 9, appearances: 13 },
+                { flag: '🇧🇦', name: 'Bosnia and Herzegovina', nameCn: '波黑', group: 'B', rank: 65, appearances: 1 },
+                { flag: '🇧🇷', name: 'Brazil', nameCn: '巴西', group: 'C', rank: 6, appearances: 22 },
+                { flag: '🇨🇻', name: 'Cabo Verde', nameCn: '佛得角', group: 'H', rank: 69, appearances: 0 },
+                { flag: '🇨🇴', name: 'Colombia', nameCn: '哥倫比亞', group: 'K', rank: 13, appearances: 6 },
+                { flag: '🇨🇩', name: 'Congo DR', nameCn: '剛果民主共和國', group: 'K', rank: 46, appearances: 0 },
+                { flag: '🇨🇮', name: 'Côte d\'Ivoire', nameCn: '科特迪瓦', group: 'E', rank: 34, appearances: 3 },
+                { flag: '🇭🇷', name: 'Croatia', nameCn: '克羅地亞', group: 'L', rank: 11, appearances: 6 },
+                { flag: '🇨🇼', name: 'Curaçao', nameCn: '庫拉索', group: 'E', rank: 82, appearances: 0 },
+                { flag: '🇨🇿', name: 'Czechia', nameCn: '捷克', group: 'A', rank: 41, appearances: 1 },
+                { flag: '🇪🇨', name: 'Ecuador', nameCn: '厄瓜多爾', group: 'E', rank: 23, appearances: 4 },
+                { flag: '🇪🇬', name: 'Egypt', nameCn: '埃及', group: 'G', rank: 29, appearances: 3 },
+                { flag: '🏴󠁧󠁢󠁥󠁮󠁧󠁿', name: 'England', nameCn: '英格蘭', group: 'L', rank: 4, appearances: 16 },
+                { flag: '🇫🇷', name: 'France', nameCn: '法國', group: 'I', rank: 1, appearances: 16 },
+                { flag: '🇩🇪', name: 'Germany', nameCn: '德國', group: 'E', rank: 10, appearances: 10 },
+                { flag: '🇬🇭', name: 'Ghana', nameCn: '加納', group: 'L', rank: 74, appearances: 4 },
+                { flag: '🇭🇹', name: 'Haiti', nameCn: '海地', group: 'C', rank: 83, appearances: 1 },
+                { flag: '🇮🇷', name: 'IR Iran', nameCn: '伊朗', group: 'G', rank: 21, appearances: 6 },
+                { flag: '🇮🇶', name: 'Iraq', nameCn: '伊拉克', group: 'I', rank: 57, appearances: 1 },
+                { flag: '🇯🇵', name: 'Japan', nameCn: '日本', group: 'F', rank: 18, appearances: 7 },
+                { flag: '🇯🇴', name: 'Jordan', nameCn: '約旦', group: 'J', rank: 63, appearances: 0 },
+                { flag: '🇰🇷', name: 'Korea Republic', nameCn: '韓國', group: 'A', rank: 25, appearances: 10 },
+                { flag: '🇲🇦', name: 'Morocco', nameCn: '摩洛哥', group: 'C', rank: 8, appearances: 6 },
+                { flag: '🇳🇱', name: 'Netherlands', nameCn: '荷蘭', group: 'F', rank: 7, appearances: 10 },
+                { flag: '🇳🇿', name: 'New Zealand', nameCn: '新西蘭', group: 'G', rank: 85, appearances: 2 },
+                { flag: '🇳🇴', name: 'Norway', nameCn: '挪威', group: 'I', rank: 31, appearances: 3 },
+                { flag: '🇵🇦', name: 'Panama', nameCn: '巴拿馬', group: 'L', rank: 33, appearances: 1 },
+                { flag: '🇵🇾', name: 'Paraguay', nameCn: '巴拉圭', group: 'D', rank: 40, appearances: 8 },
+                { flag: '🇵🇹', name: 'Portugal', nameCn: '葡萄牙', group: 'K', rank: 5, appearances: 8 },
+                { flag: '🇶🇦', name: 'Qatar', nameCn: '卡塔爾', group: 'B', rank: 55, appearances: 1 },
+                { flag: '🇸🇦', name: 'Saudi Arabia', nameCn: '沙特阿拉伯', group: 'H', rank: 61, appearances: 6 },
+                { flag: '🏴󠁧󠁢󠁳󠁣󠁴󠁿', name: 'Scotland', nameCn: '蘇格蘭', group: 'C', rank: 43, appearances: 7 },
+                { flag: '🇸🇳', name: 'Senegal', nameCn: '塞內加爾', group: 'I', rank: 14, appearances: 3 },
+                { flag: '🇿🇦', name: 'South Africa', nameCn: '南非', group: 'A', rank: 60, appearances: 3 },
+                { flag: '🇪🇸', name: 'Spain', nameCn: '西班牙', group: 'H', rank: 2, appearances: 16 },
+                { flag: '🇸🇪', name: 'Sweden', nameCn: '瑞典', group: 'F', rank: 38, appearances: 12 },
+                { flag: '🇨🇭', name: 'Switzerland', nameCn: '瑞士', group: 'B', rank: 19, appearances: 12 },
+                { flag: '🇹🇳', name: 'Tunisia', nameCn: '突尼斯', group: 'F', rank: 44, appearances: 6 },
+                { flag: '🇹🇷', name: 'Türkiye', nameCn: '土耳其', group: 'D', rank: 22, appearances: 2 },
+                { flag: '🇺🇾', name: 'Uruguay', nameCn: '烏拉圭', group: 'H', rank: 17, appearances: 14 },
+                { flag: '🇺🇿', name: 'Uzbekistan', nameCn: '烏茲別克斯坦', group: 'K', rank: 50, appearances: 0 }
+            ]
+        };
+        
+        const groupNames = {
+            'A': ['墨西哥', '韓國', '捷克', '南非'],
+            'B': ['加拿大', '波黑', '卡塔爾', '瑞士'],
+            'C': ['巴西', '摩洛哥', '海地', '蘇格蘭'],
+            'D': ['美國', '澳大利亞', '巴拉圭', '土耳其'],
+            'E': ['德國', '科特迪瓦', '厄瓜多爾', '庫拉索'],
+            'F': ['日本', '荷蘭', '瑞典', '突尼斯'],
+            'G': ['比利時', '埃及', '伊朗', '新西蘭'],
+            'H': ['西班牙', '沙特阿拉伯', '佛得角', '烏拉圭'],
+            'I': ['法國', '挪威', '伊拉克', '塞內加爾'],
+            'J': ['阿根廷', '阿爾及利亞', '奧地利', '約旦'],
+            'K': ['哥倫比亞', '剛果民主共和國', '葡萄牙', '烏茲別克斯坦'],
+            'L': ['克羅地亞', '英格蘭', '加納', '巴拿馬']
+        };
+        
+        // Render Team Cards
+        function renderTeams(containerId, teamList) {
+            const container = document.getElementById(containerId);
+            container.innerHTML = teamList.map(team => `
+                <div class="team-card fade-in">
+                    <div class="flag">${team.flag}</div>
+                    <div class="name">${team.name}</div>
+                    <div class="name-cn">${team.nameCn}</div>
+                    <div class="meta">
+                        <span>Group ${team.group}</span>
+                        <span>#${team.rank}</span>
+                    </div>
+                </div>
+            `).join('');
+        }
+        
+        // Render Groups
+        function renderGroups() {
+            const allTeams = [...teams.hosts, ...teams.qualified];
+            const container = document.getElementById('groupsContainer');
+            
+            const groupsHTML = Object.keys(groupNames).map(letter => {
+                const groupTeams = groupNames[letter].map(nameCn => {
+                    const team = allTeams.find(t => t.nameCn === nameCn);
+                    return team ? `
+                        <div class="group-team">
+                            <span class="flag">${team.flag}</span>
+                            <div class="info">
+                                <div class="name">${team.nameCn}</div>
+                                <div class="rank">世界排名 #${team.rank}</div>
+                            </div>
+                        </div>
+                    ` : '';
+                }).join('');
+                
+                return `
+                    <div class="group-card fade-in">
+                        <div class="group-header">Group ${letter}</div>
+                        <div class="group-teams">${groupTeams}</div>
+                    </div>
+                `;
+            }).join('');
+            
+            container.innerHTML = groupsHTML;
+        }
+        
+        // Tab Navigation
+        document.querySelectorAll('.tab').forEach(tab => {
+            tab.addEventListener('click', () => {
+                // Update active tab
+                document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+                tab.classList.add('active');
+                
+                // Show corresponding section
+                const sectionId = tab.dataset.section;
+                document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+                document.getElementById(sectionId).classList.add('active');
+            });
+        });
+        
+        // Initialize
+        renderTeams('hosts', teams.hosts);
+        renderTeams('qualified', teams.qualified.sort((a, b) => a.rank - b.rank));
+        renderGroups();
+    </script>
+</body>
+</html>
